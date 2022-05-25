@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  kpj-homework:
+    image: kpj-homework:0.0.1-SNAPSHOT
+    environment:
+      SPRING_RABBITMQ_ADDRESSES: "${RABBIT_ADDRESS:-amqp://guest:guest@host.docker.internal:5672/}"
+    ports:
+      - '24392:8080'
