@@ -63,7 +63,12 @@ public class RabbitMQServiceImpl implements MessagingService {
     }
 
     @Override
-    @RabbitListener(bindings = @QueueBinding(value = @org.springframework.amqp.rabbit.annotation.Queue(name = FANOUT_NAME_PROPERTY_NAME), exchange = @Exchange(name = FANOUT_NAME_PROPERTY_NAME, type = ExchangeTypes.FANOUT)))
+    @RabbitListener(bindings = @QueueBinding(
+            value = @org.springframework.amqp.rabbit.annotation.Queue(
+                    name = QUEUE_NAME_PROPERTY_NAME),
+            exchange = @Exchange(
+                    name = FANOUT_NAME_PROPERTY_NAME,
+                    type = ExchangeTypes.FANOUT)))
     public void receiveMessage(String message) {
         log.info("Message received: {}", message);
         if (!serviceAlreadyExists(message)) {
@@ -81,6 +86,6 @@ public class RabbitMQServiceImpl implements MessagingService {
 
     @Override
     public void sendMessage(String message) {
-        rabbitTemplate.convertAndSend(fanoutName, message);
+        rabbitTemplate.convertAndSend(fanoutName, "", message);
     }
 }
