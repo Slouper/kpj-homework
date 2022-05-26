@@ -1,19 +1,21 @@
 package cz.inventi.homework.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class ServiceDto {
     private int id;
     @NotNull
-    private final String name;
+    private String name;
     @NotNull
-    private final String port;
+    private String port;
     @NotNull
-    private final LocalDateTime registerTime;
+    private LocalDateTime registerTime;
 }
